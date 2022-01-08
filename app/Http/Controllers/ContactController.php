@@ -35,7 +35,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         $user = (isset($_SESSION['name'])) ? $_SESSION['name'] : '';
 
         $contacts = Contact::all();
