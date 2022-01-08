@@ -8,15 +8,7 @@ use App\Models\User;
 class UserController extends Controller
 {
     public function login(Request $request){
-        $errcode = ($request->get('errcode') ?? 0);
-
-        $message = '';
-
-        if ($errcode == 1){
-            $message = 'Wrong User and Password';
-        }
-
-        return view('site.login', ['message' => $message]);
+        return view('site.login', ['message' => '']);
     }
 
     public function authenticate(Request $request){
@@ -41,7 +33,8 @@ class UserController extends Controller
             ->first();
 
         if (!isset($user->name)){
-            return redirect()->route('site.login', ['errcode' => 1]);
+            //return redirect()->route('site.login', ['errcode' => 1]);
+            return view('site.login', ['message' => 'Login failed: wrong User or Password']);
         }
 
         session_start();

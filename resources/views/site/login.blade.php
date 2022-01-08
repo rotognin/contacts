@@ -1,16 +1,10 @@
 @include('site.layout.topdefault')
 
 <div class="w3-container">
+    <a class="w3-btn w3-blue w3-small" href="{{ route('site.index') }}">Back</a><br>
     <h3>Login</h3>
 
-    @if($message != '')
-        <div class="w3-panel w3-red">
-            <p>Login failed!</p>
-            <p>{{ $message }}</p>
-        </div>
-    @endisset
-
-    <form method="post" action="{{ route('site.autenticate') }}">
+    <form method="post" action="{{ route('site.authenticate') }}">
         @csrf
         <label for="user">User:</lable><br>
         <input id="user" value="{{ old('user') }}" type="text" name="user" autofocus>
@@ -22,6 +16,12 @@
         <br><br>
         <button type="submit" class="w3-btn w3-blue">Login</button>
     </form>
+
+    @if($message != '')
+        <div class="w3-panel w3-red">
+            <p>{{ $message }}</p>
+        </div>
+    @endisset
 </div>
 
 @include('site.layout.footerdefault')

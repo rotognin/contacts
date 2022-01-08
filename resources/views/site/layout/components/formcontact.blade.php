@@ -19,5 +19,5 @@
     <input type="text" name="email" value="{{ $contact->email ?? old('email') }}">
     <span style="color:red"><i>{{ $errors->has('email') ? $errors->first('email') : '' }}</i></span>
     <br><br>
-    <button class="w3-btn w3-blue">Save</button>
+    <button class="w3-btn w3-blue w3-small">Save</button>
 </form>

@@ -15,26 +15,28 @@
             <th>Contact</th>
             <th>E-mail</th>
             @if ($user != '')
-                <th>-</th>
-                <th>-</th>
+                <th> </th>
+                <th> </th>
+                <th> </th>
             @endif
         </tr>
 
     @foreach($contacts as $contact)
         <tr>
-            <th>{{ $contact->id }}</th>
-            <th>{{ $contact->name }}</th>
-            <th>{{ $contact->contact }}</th>
-            <th>{{ $contact->email }}</th>
+            <td>{{ $contact->id }}</td>
+            <td>{{ $contact->name }}</td>
+            <td>{{ $contact->contact }}</td>
+            <td>{{ $contact->email }}</td>
             @if ($user != '')
-                <th><a href="{{ route('contact.edit', ['contact' => $contact->id]) }}">Edit</a></th>
-                <th>
+                <td style="padding:0px"><a class="w3-btn w3-blue w3-small" style="margin-top:2px" href="{{ route('contact.show', ['contact' => $contact->id]) }}">Details</a></td>
+                <td style="padding:0px"><a class="w3-btn w3-blue w3-small" style="margin-top:2px" href="{{ route('contact.edit', ['contact' => $contact->id]) }}">Edit</a></td>
+                <td style="padding:0px">
                     <form id="form_{{ $contact->id }}" method="POST" action="{{ route('contact.destroy', ['contact' => $contact->id]) }}">
                         @csrf
                         @method('DELETE')
-                        <a href="#" onclick="document.getElementById('form_{{ $contact->id }}').submit()">Delete</a>
+                        <a class="w3-btn w3-red w3-small" style="margin-top:2px" href="#" onclick="document.getElementById('form_{{ $contact->id }}').submit()">Delete</a>
                     </form>
-                </th>
+                </td>
             @endif
         </tr>
     @endforeach

@@ -15,7 +15,7 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\ContactController::class, 'index'])->name('site.index');
-Route::get('/login/{errcode?}', [Controllers\UserController::class, 'login'])->name('site.login');
+Route::get('/login', [Controllers\UserController::class, 'login'])->name('site.login');
 Route::post('/login', [Controllers\UserController::class, 'authenticate'])->name('site.authenticate');
 Route::get('/logout', [Controllers\UserController::class, 'logout'])->name('site.logout');
 
