@@ -7,17 +7,24 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    public $rules = [
+    public $saverules = [
         'name' => ['required', 'min:6'],
         'contact' => ['digits:9', 'unique:contact'],
         'email' => ['email', 'unique:contact']
     ];
 
+    public $updaterules = [
+        'name' => ['required', 'min:6'],
+        'contact' => ['digits:9'],
+        'email' => ['email']
+    ];
+
     public $feedback = [
         'required' => 'The field :attribute is required',
         'name.min' => 'Must have at least 6 characters',
-        'digits' => 'Only numbers is aceepted, must have 9 digits',
-        'unique' => ':atribute already taken',
+        'digits' => 'Only numbers is accepted, must have 9 digits',
+        'contact.unique' => 'Contact number already taken',
+        'email.unique' => 'E-mail number already taken',
         'email' => 'Invalid e-mail'
     ];
 
@@ -54,9 +61,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        
-
-        $request->validate($this->rules, $this->feedback);
+        $request->validate($this->saverules, $this->feedback);
         Contact::create($request->all());
 
         return redirect()->route('site.index');
@@ -70,7 +75,7 @@ class ContactController extends Controller
      */
     public function show(Contact $contact)
     {
-        //
+        return view('site.showcontact', ['contact' => $contact]);
     }
 
     /**
@@ -93,12 +98,12 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {   
-        $request->validate($this->rules, $this->feedback);
+        $request->validate($this->updaterules, $this->feedback);
 
-        $contact = Contact::find($request->id);
+        //$contact = Contact::find($request->get('id'));
         $contact->update($request->all());
 
-        return redirect()->route('contact.show', ['contact' => $contact->id]);
+        return redirect()->route('contact.show', ['contact' => $contact]);
 
     }
 
@@ -110,6 +115,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return redirect()->route('contact.index');
     }
 }

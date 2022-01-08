@@ -28,7 +28,13 @@
             <th>{{ $contact->email }}</th>
             @if ($user != '')
                 <th><a href="{{ route('contact.edit', ['contact' => $contact->id]) }}">Edit</a></th>
-                <th>Delete</th>
+                <th>
+                    <form id="form_{{ $contact->id }}" method="POST" action="{{ route('contact.destroy', ['contact' => $contact->id]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" onclick="document.getElementById('form_{{ $contact->id }}').submit()">Delete</a>
+                    </form>
+                </th>
             @endif
         </tr>
     @endforeach
