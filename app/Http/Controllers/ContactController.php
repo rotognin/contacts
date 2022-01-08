@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    public $rules = [
+        'name' => ['required', 'min:6'],
+        'contact' => ['digits:9', 'unique:contact'],
+        'email' => ['email', 'unique:contact']
+    ];
+
+    public $feedback = [
+        'required' => 'The field :attribute is required',
+        'name.min' => 'Must have at least 6 characters',
+        'digits' => 'Only numbers is aceepted, must have 9 digits',
+        'unique' => ':atribute already taken',
+        'email' => 'Invalid e-mail'
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +54,12 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+
+        $request->validate($this->rules, $this->feedback);
+        Contact::create($request->all());
+
+        return redirect()->route('site.index');
     }
 
     /**
@@ -62,7 +81,7 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
-        //
+        return view('site.editcontact', ['contact' => $contact]);
     }
 
     /**
@@ -73,8 +92,14 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Contact $contact)
-    {
-        //
+    {   
+        $request->validate($this->rules, $this->feedback);
+
+        $contact = Contact::find($request->id);
+        $contact->update($request->all());
+
+        return redirect()->route('contact.show', ['contact' => $contact->id]);
+
     }
 
     /**

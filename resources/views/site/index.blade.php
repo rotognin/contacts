@@ -1,7 +1,7 @@
 @include('site.layout.topdefault')
-@include('site.layout.pagetop', ['user' => $user])
-
 <div class="w3-container">
+
+    @include('site.layout.pagetop', ['user' => $user])
 
     <h3>Contacts</h3>
     @if($user != '')
@@ -27,7 +27,7 @@
             <th>{{ $contact->contact }}</th>
             <th>{{ $contact->email }}</th>
             @if ($user != '')
-                <th>Edit</th>
+                <th><a href="{{ route('contact.edit', ['contact' => $contact->id]) }}">Edit</a></th>
                 <th>Delete</th>
             @endif
         </tr>

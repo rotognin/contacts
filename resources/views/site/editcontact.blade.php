@@ -2,8 +2,8 @@
 
 <div class="w3-container">
     <a class="w3-btn w3-blue" href="{{ route('site.index') }}">Back</a><br>
-    <h3>New Contact</h3>
-    @component('site.layout.components.formcontact')
+    <h3>Edit Contact</h3>
+    @component('site.layout.components.formcontact', ['contact' => $contact])
     @endcomponent
 </div>
 
