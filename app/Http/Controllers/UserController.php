@@ -19,7 +19,7 @@ class UserController extends Controller
         return view('site.login', ['message' => $message]);
     }
 
-    public function autenticate(Request $request){
+    public function authenticate(Request $request){
         $rules = [
             'user' => ['required', 'min:3'],
             'password' => ['required', 'min:1']
