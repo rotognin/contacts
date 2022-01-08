@@ -5,7 +5,7 @@
 
     <h3>Contacts</h3>
     @if($user != '')
-        <a class="w3-btn w3-blue" href="{{ route('contact.create') }}">New Contact</a>
+        <a class="w3-btn w3-blue w3-small" href="{{ route('contact.create') }}">New Contact</a>
     @endif
 
     <table class="w3-table w3-striped w3-bordered">

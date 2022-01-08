@@ -1,6 +1,7 @@
 @include('site.layout.topdefault')
 <div class="w3-container">
-    <a class="w3-btn w3-blue" href="{{ route('site.index') }}">Home</a><br>
+    <br>
+    <a class="w3-btn w3-blue w3-small" href="{{ route('site.index') }}">Home</a><br>
 
     <h3>Contact details:</h3>
     <br>

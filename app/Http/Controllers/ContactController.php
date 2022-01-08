@@ -9,8 +9,8 @@ class ContactController extends Controller
 {
     public $saverules = [
         'name' => ['required', 'min:6'],
-        'contact' => ['digits:9', 'unique:contact'],
-        'email' => ['email', 'unique:contact']
+        'contact' => ['digits:9', 'unique:contacts'],
+        'email' => ['email', 'unique:contacts']
     ];
 
     public $updaterules = [

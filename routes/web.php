@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Middleware\IsAuthenticatedMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,5 @@ Route::get('/login', [Controllers\UserController::class, 'login'])->name('site.l
 Route::post('/login', [Controllers\UserController::class, 'authenticate'])->name('site.authenticate');
 Route::get('/logout', [Controllers\UserController::class, 'logout'])->name('site.logout');
 
-Route::resource('contact', Controllers\ContactController::class);
+Route::middleware(IsAuthenticatedMiddleware::class)
+    ->resource('contact', Controllers\ContactController::class);

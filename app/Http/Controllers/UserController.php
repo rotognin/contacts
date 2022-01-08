@@ -33,7 +33,6 @@ class UserController extends Controller
             ->first();
 
         if (!isset($user->name)){
-            //return redirect()->route('site.login', ['errcode' => 1]);
             return view('site.login', ['message' => 'Login failed: wrong User or Password']);
         }
 
